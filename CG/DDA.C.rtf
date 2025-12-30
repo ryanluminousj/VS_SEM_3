@@ -1,0 +1,61 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #include <stdio.h>\
+#include <graphics.h>\
+#include <stdlib.h>\
+#include <math.h>\
+#include <conio.h>\
+\
+void DDAline(int x1, int y1, int x2, int y2)\
+\{\
+    int dx, dy, steps, i;\
+    float x_inc, y_inc, x, y;\
+\
+    dx = x2 - x1;\
+    dy = y2 - y1;\
+\
+    if (abs(dx) > abs(dy))\
+        steps = abs(dx);\
+    else\
+        steps = abs(dy);\
+\
+    x_inc = (float)dx / steps;\
+    y_inc = (float)dy / steps;\
+\
+    x = x1;\
+    y = y1;\
+\
+    putpixel((int)(x + 0.5), (int)(y + 0.5), WHITE);\
+\
+    for (i = 0; i < steps; i++)\
+    \{\
+        x += x_inc;\
+        y += y_inc;\
+        putpixel((int)(x + 0.5), (int)(y + 0.5), WHITE);\
+    \}\
+\}\
+\
+int main()\
+\{\
+    int gd = DETECT, gm;\
+    int x1, y1, x2, y2;\
+\
+    printf("Enter starting coordinates (x1 y1): ");\
+    scanf("%d %d", &x1, &y1);\
+\
+    printf("Enter ending coordinates (x2 y2): ");\
+    scanf("%d %d", &x2, &y2);\
+\
+    initgraph(&gd, &gm, "C:\\\\TURBOC3\\\\BGI");\
+\
+    DDAline(x1, y1, x2, y2);\
+\
+    getch();\
+    closegraph();\
+    return 0;\
+\}}
